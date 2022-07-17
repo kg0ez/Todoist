@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Todoist.Models.Task>
+<body>
+    <header class="header"></header>
+    <main class="page">
+        <div class="main-block__body _container">
+            <div class="page__title">
+                <h2 class="main-block_title">Список задач</h2>
+            </div>
+            <a class="main-block__button main-block__button_border" asp-action="CreateTask">Добавить задачу</a>
+        </div>
+        <section class="page_tasks tasks">
+            <div class="tasks__container _container">
+                <div class="tasks__body">
+                    @foreach (var item in Model)
+                    {
+                        <div class="tasks__column">
+                            <div class="tasks__item item-task">
+                                <div class="item-tasks__card">
+                                    <img class="item-tasks__icon" src="~/img/tasks/todo.svg" alt="Task" />
+                                    @{
+                                        if (item.FinalData.ToShortDateString() == DateTime.Now.ToShortDateString())
+                                        {
+                                            <div class="item-tasks__text">Сегодня</div>
+                                        }
+                                        else if (item.FinalData.ToShortDateString() == DateTime.Now.AddDays(1).ToShortDateString())
+                                        {
+                                            <div class="item-tasks__text">Завтра</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="item-tasks__text">@item.FinalData.ToShortDateString()</div>
+                                        }
+                                    }
+                                </div>
+                                <h3 class="item-tasks__title">@item.Title</h3>
+                                <div class="item-tasks__text">@item.Subtitle</div>
+                                <div class="item-tasks__card">
+                                    <a class="card__button" asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">Изменить</a>
+                                    <form asp-controller="Home" asp-action="Delete" method="post" asp-route-id="@item.Id">
+                                        <input class="card__button" type="submit" value="Удалить" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="tasks__column">
+                        <a asp-action="CreateTask">
+                            <div class="tasks__item item-task add-img">
+                                <img class="center-img" src="~/img/tasks/plus.svg" alt="Task" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+
+

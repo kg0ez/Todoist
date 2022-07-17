@@ -1,0 +1,31 @@
+﻿@model Todoist.Models.Task
+
+<body>
+    <header class="header"></header>
+    <main class="page">
+        <div class="main-block__body _container">
+            <div class="page__title">
+                <h2 class="main-block_title">Добавление задачи</h2>
+            </div>
+            <form class="main__form" asp-action="createTask" asp-controller="home">
+                <div class="form__block">
+                    <label class="form__title" asp-for="Title">Задача</label><br />
+                    <input class="form__input" type="text" placeholder="Название задачи" asp-for="Title" />
+                </div>
+                <div class="form__block">
+                    <label class="form__title" asp-for="Subtitle">Описание</label><br />
+                    <input class="form__input" type="text" placeholder="Описание задачи" asp-for="Subtitle" />
+                </div>
+                <div class="form__block">
+                    <label class="form__title" asp-for="FinalData">Дата</label><br />
+                    <input class="form__input" type="date" placeholder="Срок выполнения" asp-for="FinalData" />
+                </div>
+                <div class="form__block">
+                    <input class="form__button" type="submit" value="Отправить" />
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+
